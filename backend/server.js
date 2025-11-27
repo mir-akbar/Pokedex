@@ -105,6 +105,11 @@ app.get('/api/pokemon/:name', async (req, res) => {
     }
 });
 
-app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
-});
+if (process.env.NODE_ENV !== 'production') {
+    const HOST = process.env.HOST || 'localhost';
+    app.listen(PORT, () => {
+        console.log(`Server running on http://${HOST}:${PORT}`);
+    });
+}
+
+export default app;
